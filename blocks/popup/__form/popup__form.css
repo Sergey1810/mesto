@@ -3,13 +3,14 @@
   border: none;
   background-color: #ffffff;
   border-radius: 10px;
-  max-width: 430px;
+  min-width: 430px;
   height: 330px;
   position: relative;
 }
 
 @media screen and (max-width:630px){
   .popup__form{
+    min-width: 0;
     margin: 0 auto;
     max-width: 282px;
     height: 322px;

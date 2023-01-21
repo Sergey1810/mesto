@@ -6,12 +6,17 @@
   margin-top: 43px;
 }
 
-@media screen and (max-width:590px){
+@media screen and (max-width:910px){
   .header__logo{
     background-size: contain;
+    margin-left: 27px;
+  }
+}  
+
+@media screen and (max-width:590px){
+  .header__logo{
     width: 104px;
     height: 25px;
     margin-top: 28px;
-    margin-left: 27px;
   }
 }  
