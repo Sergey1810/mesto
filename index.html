@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Document</title>
+</head>
+<body class="body">
+  <div class="page">
+    <header class="header">
+      <div class="header__logo"></div>
+      <div class="header__line"></div>
+    </header>
+    <main>
+      <section class="profile">
+        <div class="profile__row profile__row_in-row">
+          <div class="profile__avatar">
+            <img src="./images/Avatar.png" alt="Жак-Ив Кусто">
+          </div>
+          <div class="profile__info">
+            <div class="profile__row">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <button class="profile__create-btn"></button>
+          </div>
+          <p class="profile__subtitle">Исследователь океана</p>
+          </div> 
+        </div>
+        <button class="profile__add-btn"></button>
+      </section>
+      <section class="elements">
+        <div class="element">
+          <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
+          <div class="element__block">
+            <h2 class="element__title">Карачаевск</h2>
+            <div class="element__like"></div>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/elbrus.jpg" alt="Эльбрус">
+          <div class="element__block">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <div class="element__like"></div>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/donbay.jpg" alt="Донбай">
+          <div class="element__block">
+            <h2 class="element__title">Донбай</h2>
+            <div class="element__like"></div>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/elbrus.jpg" alt="Эльбрус">
+          <div class="element__block">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <div class="element__like"></div>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/donbay.jpg" alt="Донбай">
+          <div class="element__block">
+            <h2 class="element__title">Донбай</h2>
+            <div class="element__like"></div>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия">
+          <div class="element__block">
+            <h2 class="element__title">Карачаево-Черкесия</h2>
+            <div class="element__like"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">&copy; 2022 Mesto Russia</footer>
+      
+    <div class="popup">
+      <form action="" class="popup__form">
+        <button class="popup__btn-close"></button>
+        <fieldset class="popup__input-container">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input type="text" class="popup__input popup__input-name">
+          <input type="text" class="popup__input popup__input-job">
+          <button class="popup__btn-save" >Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <script src="./vendor/index.js"></script>
+</body>
+</html>

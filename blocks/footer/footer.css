@@ -1,0 +1,18 @@
+.footer{
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  margin-top: 67px;
+}
+
+@media screen and (max-width:590px){
+  .footer{
+    margin-top: 48px;
+    margin-left: 19px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
