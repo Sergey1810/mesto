@@ -2,3 +2,9 @@
   display: flex;
   position: relative;
 }
+
+@media screen and (max-width: 660px) {
+  .profile__row{
+    flex-direction: column;
+  }
+}

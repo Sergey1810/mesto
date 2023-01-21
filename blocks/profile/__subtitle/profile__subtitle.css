@@ -2,14 +2,18 @@
   margin: 0;
   margin-top: 16px;
   padding: 0;
-  font-family: 'Inter', 'sans-serif';
+  font-family: 'Inter','Arial',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 300px;
 }
 
-@media screen and (max-width:630px){
+@media screen and (max-width:660px){
   .profile__subtitle{
     margin: 0 auto;
     margin-top: 14px;
