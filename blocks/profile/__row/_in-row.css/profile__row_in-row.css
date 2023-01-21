@@ -1,0 +1,5 @@
+@media screen and (max-width: 590px) {
+  .profile__row_in-row{
+    flex-direction: column;
+  }
+}

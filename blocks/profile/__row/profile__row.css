@@ -1,9 +1,4 @@
 .profile__row{
   display: flex;
+  position: relative;
 }
-
-@media screen and (max-width:630px){
-  .profile__title{
-    
-  }
-}  
