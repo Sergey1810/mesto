@@ -8,8 +8,8 @@
   width: 32px;
   height: 32px;
   position: absolute;
-  top: -30px;
-  right: -30px;
+  top: -39px;
+  right: -39px;
   transition: opacity 0.3s linear;
   cursor: pointer;
 }
@@ -18,7 +18,7 @@
     opacity: 0.6;
 }
 
-@media screen and (max-width:630px){
+@media screen and (max-width:660px){
   .popup__btn-close{
     width: 20px;
     height: 20px;

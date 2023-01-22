@@ -9,8 +9,7 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
-  margin-top: 48px;
-  margin-bottom: 37px;
+  margin: 48px auto 37px auto;
   transition: opacity 0.3s linear;
   border: none;
   border-radius: 2px;
@@ -23,8 +22,11 @@
 
 @media screen and (max-width:660px) {
   .popup__btn-save{
+    height: 46px;
     min-width: 238px;
-    margin-bottom: 25px;
     margin-top: 45px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
