@@ -63,8 +63,7 @@ function handleCardSubmit (evt) {
     like.addEventListener('click',function() {like.classList.toggle('element__like_active')});
     let clearCard = card.querySelector('.element__clear') 
     clearCard.addEventListener('click',function() {
-        card.remove();
-        
+        card.remove();    
     })
     elements.prepend(card)
     closePopupCard()
@@ -84,8 +83,7 @@ function renderCards(arr) {
     like.addEventListener('click',function() {like.classList.toggle('element__like_active')});
     let clearCard = card.querySelector('.element__clear') 
     clearCard.addEventListener('click',function() {
-        card.remove();
-        
+        card.remove();    
     })
     return card
   }) 
