@@ -29,14 +29,13 @@ const initialCards = [
   const createCardBtn = document.querySelector('.profile__add-btn');
   const closeCardBtn = document.querySelector('.popup__btn-card-close')
   const addCardBtn = document.querySelector('.popup__btn-card-create')
-  const closePopupBtn = document.querySelector('.popup__btn-close');
   const closeProfileBtn = document.querySelector('.popup__btn-profile-close')
   const profileName = document.querySelector('.profile__title');
   const profileJob = document.querySelector('.profile__subtitle');
-  const formElement = document.querySelector('.profile-popup');
+  const popupProfile = document.querySelector('.popup-profile');
   const popupCard = document.querySelector('.popup-card');
-  const nameInput = formElement.querySelector('.popup__input_type_name');
-  const jobInput = formElement.querySelector('.popup__input_type_job');
+  const nameInput = popupProfile.querySelector('.popup__input_type_name');
+  const jobInput = popupProfile.querySelector('.popup__input_type_job');
   const titleInput = popupCard.querySelector('.popup__input_type_name-card');
   const urlInput = popupCard.querySelector('.popup__input_type_url');
   const formProfile = document.querySelector('.popup_form-profile');
@@ -100,7 +99,7 @@ function closePopup(popup){
 }
 
 function openPopupProfile(){
-    openPopup(formElement)
+    openPopup(popupProfile)
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 }
@@ -109,13 +108,13 @@ function handleFormSubmit (evt) {
     evt.preventDefault(); 
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    closePopup(formElement)
+    closePopup(popupProfile)
 }
 
 formProfile.addEventListener('submit', handleFormSubmit); 
 createProfileBtn.addEventListener('click', openPopupProfile);
 createCardBtn.addEventListener('click', () => {openPopup(popupCard)});
-closeProfileBtn.addEventListener('click', () => {closePopup(formElement)});
+closeProfileBtn.addEventListener('click', () => {closePopup(popupProfile)});
 closeCardBtn.addEventListener('click',() => {closePopup(popupCard)});
 formCards.addEventListener('submit', handleCardSubmit);
 imageClose.addEventListener('click', () => {closePopup(formImage)})
