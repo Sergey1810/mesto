@@ -109,7 +109,7 @@ function handleFormSubmit (evt) {
     evt.preventDefault(); 
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    closePopup()
+    closePopup(formElement)
 }
 
 formProfile.addEventListener('submit', handleFormSubmit); 
