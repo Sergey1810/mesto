@@ -30,24 +30,24 @@ errorClass}) => {
     return formIsValid;
   };
 
-  const setFieldError = (elementInput, elementError,{ validationMessage, valid, invalidFieldClass },errorClass) => {
+  const setFieldError = (elementInput, elementError,{ validationMessage, valid, invalidInputClass },errorClass) => {
     elementError = document.querySelector(`.${elementInput.name}-input-error`);
     elementError.textContent = validationMessage; 
     if (valid) {
-      elementInput.classList.remove(invalidFieldClass);
+      elementInput.classList.remove(invalidInputClass);
       elementError.classList.remove(`${errorClass}`)
     } else {
-      elementInput.classList.add(invalidFieldClass); 
+      elementInput.classList.add(invalidInputClass); 
       elementError.classList.add(`${errorClass}`);
     }
   };
   
-  const checkFieldValidity = (elementInput, elementError, invalidFieldClass, errorClass) => {
+  const checkFieldValidity = (elementInput, elementError, invalidInputClass, errorClass) => {
     const { validationMessage, validity: { valid } } = elementInput;
     const params = {
       validationMessage,
       valid,
-      invalidFieldClass,
+      invalidInputClass,
     };
     setFieldError(elementInput, elementError, params, errorClass);
     return valid;
