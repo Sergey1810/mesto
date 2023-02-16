@@ -1,11 +1,11 @@
 
-const enableValidations = ({formSelector, 
+const enableValidations = ({formSelector,
 inputSelector,
 submitButtonSelector,
 inactiveButtonClass,
 inputErrorClass,
 errorClass}) => {
-  const formList = Array.from(document.querySelectorAll(formSelector)); 
+  const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
     const SubmitFormBtn = formElement.querySelector(submitButtonSelector);
@@ -32,12 +32,12 @@ const checkFormValidity = (elementsFields, elementSubmit, inactiveButtonClass) =
 
 const setFieldError = (elementInput, elementError,{ validationMessage, valid, invalidInputClass },errorClass) => {
   elementError = document.querySelector(`.${elementInput.name}-input-error`);
-  elementError.textContent = validationMessage; 
+  elementError.textContent = validationMessage;
   if (valid) {
     elementInput.classList.remove(invalidInputClass);
     elementError.classList.remove(`${errorClass}`)
   } else {
-    elementInput.classList.add(invalidInputClass); 
+    elementInput.classList.add(invalidInputClass);
     elementError.classList.add(`${errorClass}`);
   }
   };
@@ -62,4 +62,3 @@ const toggleFormSubmit = (elementSubmit, { disable }, inactiveButtonClass) => {
     elementSubmit.setAttribute('disabled', 'disabled');
   }
 };
-
