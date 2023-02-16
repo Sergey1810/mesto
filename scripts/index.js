@@ -112,9 +112,36 @@ function handleFormSubmit (evt) {
 }
 
 formProfile.addEventListener('submit', handleFormSubmit); 
+formCards.addEventListener('submit', handleCardSubmit);
 createProfileBtn.addEventListener('click', openPopupProfile);
 createCardBtn.addEventListener('click', () => {openPopup(popupCard)});
 closeProfileBtn.addEventListener('click', () => {closePopup(popupProfile)});
 closeCardBtn.addEventListener('click',() => {closePopup(popupCard)});
-formCards.addEventListener('submit', handleCardSubmit);
 imageClose.addEventListener('click', () => {closePopup(formImage)})
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){
+  closePopup(popupCard);
+  closePopup(popupProfile);
+  closePopup(formImage)
+  }
+})
+
+  document.addEventListener('mouseup', function(e){
+    if(e.target.closest('.popup__container') === null){
+      closePopup(popupCard);
+      closePopup(popupProfile);
+      closePopup(formImage)
+    }
+});
+
+const formConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__btn-save',
+  inactiveButtonClass: 'popup__btn-save_disable',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error-message_active'
+}
+
+enableValidations(formConfig); 
