@@ -48,7 +48,6 @@ const initialCards = [
   const imageClose = document.querySelector('.popup__btn-image-close')
 
   function createCard(item) {
-
     const card = template.cloneNode(true)
     card.querySelector('.element__image').src = item.link
     card.querySelector('.element__image').alt = item.name
@@ -63,10 +62,8 @@ const initialCards = [
     like.addEventListener('click', function() {like.classList.toggle('element__like_active')});
     const clearCard = card.querySelector('.element__clear') 
     clearCard.addEventListener('click', function() {card.remove()})
-   
     return card 
 }
-
 
 function handleCardSubmit (evt) {
     evt.preventDefault();
@@ -121,9 +118,9 @@ imageClose.addEventListener('click', () => {closePopup(formImage)})
 
 document.addEventListener('keydown', function(e){
   if (e.key === 'Escape'){
-  closePopup(popupCard);
-  closePopup(popupProfile);
-  closePopup(formImage)
+    closePopup(popupCard);
+    closePopup(popupProfile);
+    closePopup(formImage)
   }
 })
 

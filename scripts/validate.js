@@ -21,7 +21,7 @@ errorClass}) => {
   });
 }
 
-  const checkFormValidity = (elementsFields, elementSubmit, inactiveButtonClass) => {
+const checkFormValidity = (elementsFields, elementSubmit, inactiveButtonClass) => {
     toggleFormSubmit(elementSubmit, { disable: true }, inactiveButtonClass);
     const formIsValid = elementsFields.every(({ validity }) => validity.valid);
     if (!formIsValid) {
@@ -30,28 +30,28 @@ errorClass}) => {
     return formIsValid;
   };
 
-  const setFieldError = (elementInput, elementError,{ validationMessage, valid, invalidInputClass },errorClass) => {
-    elementError = document.querySelector(`.${elementInput.name}-input-error`);
-    elementError.textContent = validationMessage; 
-    if (valid) {
-      elementInput.classList.remove(invalidInputClass);
-      elementError.classList.remove(`${errorClass}`)
-    } else {
-      elementInput.classList.add(invalidInputClass); 
-      elementError.classList.add(`${errorClass}`);
-    }
+const setFieldError = (elementInput, elementError,{ validationMessage, valid, invalidInputClass },errorClass) => {
+  elementError = document.querySelector(`.${elementInput.name}-input-error`);
+  elementError.textContent = validationMessage; 
+  if (valid) {
+    elementInput.classList.remove(invalidInputClass);
+    elementError.classList.remove(`${errorClass}`)
+  } else {
+    elementInput.classList.add(invalidInputClass); 
+    elementError.classList.add(`${errorClass}`);
+  }
   };
   
-  const checkFieldValidity = (elementInput, elementError, invalidInputClass, errorClass) => {
-    const { validationMessage, validity: { valid } } = elementInput;
-    const params = {
-      validationMessage,
-      valid,
-      invalidInputClass,
-    };
-    setFieldError(elementInput, elementError, params, errorClass);
-    return valid;
+const checkFieldValidity = (elementInput, elementError, invalidInputClass, errorClass) => {
+  const { validationMessage, validity: { valid } } = elementInput;
+  const params = {
+    validationMessage,
+    valid,
+    invalidInputClass,
   };
+  setFieldError(elementInput, elementError, params, errorClass);
+  return valid;
+};
 
 const toggleFormSubmit = (elementSubmit, { disable }, inactiveButtonClass) => {
   if (disable) {
