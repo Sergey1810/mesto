@@ -77,7 +77,6 @@ function handleCardSubmit (evt) {
     }
     const card = createCard(item)
     evt.target.reset()
-    addCardBtn.setAttribute('disabled', 'disabled')
     elements.prepend(card)
     closePopup(popupCard)
 }
