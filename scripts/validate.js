@@ -8,18 +8,28 @@ errorClass}) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-    const SubmitFormBtn = formElement.querySelector(submitButtonSelector);
+    const submitFormBtn = formElement.querySelector(submitButtonSelector);
+    formElement.addEventListener('reset', () => {
+      setTimeout(() => {
+        toggleButtonState(submitFormBtn, inactiveButtonClass);
+      }, 0); 
+    });
       inputList.forEach((elementInput) => {
       const errorTextContainerSelector = `.${elementInput.name}-input-error`;
       const elementError = formElement.querySelector(errorTextContainerSelector);
       elementInput.addEventListener('input', (e) => {
         const input = e.target;
-        checkFormValidity(inputList, SubmitFormBtn, inactiveButtonClass);
+        checkFormValidity(inputList, submitFormBtn, inactiveButtonClass);
         checkFieldValidity(input, elementError, inputErrorClass, errorClass);
       });
     });
   });
 }
+
+function toggleButtonState(elementSubmit, inactiveButtonClass){
+  elementSubmit.classList.add(inactiveButtonClass)
+  elementSubmit.setAttribute('disabled', 'disabled');
+ };
 
 const checkFormValidity = (elementsFields, elementSubmit, inactiveButtonClass) => {
     toggleFormSubmit(elementSubmit, { disable: true }, inactiveButtonClass);
