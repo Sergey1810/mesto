@@ -11,7 +11,7 @@ errorClass}) => {
     const submitFormBtn = formElement.querySelector(submitButtonSelector);
     formElement.addEventListener('reset', () => {
       setTimeout(() => {
-        toggleButtonState(submitFormBtn, inactiveButtonClass);
+        toggleFormSubmit(submitFormBtn, { disable: false }, inactiveButtonClass);
       }, 0); 
     });
       inputList.forEach((elementInput) => {
@@ -25,11 +25,6 @@ errorClass}) => {
     });
   });
 }
-
-function toggleButtonState(elementSubmit, inactiveButtonClass){
-  elementSubmit.classList.add(inactiveButtonClass)
-  elementSubmit.setAttribute('disabled', 'disabled');
- };
 
 const checkFormValidity = (elementsFields, elementSubmit, inactiveButtonClass) => {
     toggleFormSubmit(elementSubmit, { disable: true }, inactiveButtonClass);
