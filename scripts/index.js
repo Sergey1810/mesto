@@ -46,12 +46,16 @@ const initialCards = [
   const formImageSubtitle = document.querySelector('.popup__subtitle')
   const template = document.querySelector('#card').content.querySelector('.element');
   const imageClose = document.querySelector('.popup__btn-image-close')
+ 
+ 
+
 
   function createCard(item) {
     const card = template.cloneNode(true)
-    card.querySelector('.element__image').src = item.link
-    card.querySelector('.element__image').alt = item.name
-    card.querySelector('.element__image').addEventListener('click', function() {
+    const img = card.querySelector('.element__image');
+    img.src = item.link
+    img.alt = item.name
+    img.addEventListener('click', function() {
       popupImage.src = item.link
       popupImage.alt = item.name
       formImageSubtitle.textContent = item.name
@@ -73,6 +77,7 @@ function handleCardSubmit (evt) {
     }
     const card = createCard(item)
     evt.target.reset()
+    addCardBtn.setAttribute('disabled', 'disabled')
     elements.prepend(card)
     closePopup(popupCard)
 }
@@ -87,12 +92,29 @@ function renderCards(arr) {
 
 renderCards(initialCards)
 
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_open') 
+    closePopup(openedPopup)
+  }
+}
+
+function closeByOverlay(e){
+  if(e.target.closest('.popup__container') === null){
+    closePopup(e.target)
+  }
+}
+
 function openPopup(popup){
   popup.classList.add('popup_open');
+  document.addEventListener('keydown', closeByEscape);
+  document.addEventListener('mouseup',closeByOverlay);
 }
 
 function closePopup(popup){
   popup.classList.remove('popup_open');
+  document.removeEventListener('keydown', closeByEscape);
+  document.removeEventListener('mouseup',closeByOverlay);
 }
 
 function openPopupProfile(){
@@ -101,36 +123,20 @@ function openPopupProfile(){
     jobInput.value = profileJob.textContent;
 }
 
-function handleFormSubmit (evt) {
+function handleProfileFormSubmit (evt) {
     evt.preventDefault(); 
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     closePopup(popupProfile)
 }
 
-formProfile.addEventListener('submit', handleFormSubmit); 
+formProfile.addEventListener('submit', handleProfileFormSubmit); 
 formCards.addEventListener('submit', handleCardSubmit);
 createProfileBtn.addEventListener('click', openPopupProfile);
 createCardBtn.addEventListener('click', () => {openPopup(popupCard)});
 closeProfileBtn.addEventListener('click', () => {closePopup(popupProfile)});
 closeCardBtn.addEventListener('click',() => {closePopup(popupCard)});
 imageClose.addEventListener('click', () => {closePopup(formImage)})
-
-document.addEventListener('keydown', function(e){
-  if (e.key === 'Escape'){
-    closePopup(popupCard);
-    closePopup(popupProfile);
-    closePopup(formImage)
-  }
-})
-
-  document.addEventListener('mouseup', function(e){
-    if(e.target.closest('.popup__container') === null){
-      closePopup(popupCard);
-      closePopup(popupProfile);
-      closePopup(formImage)
-    }
-});
 
 const formConfig = {
   formSelector: '.popup__form',
