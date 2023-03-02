@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from "./FormValidator.js";
+
 const initialCards = [
     {
       name: 'Архыз',
@@ -28,7 +31,6 @@ const initialCards = [
   const createProfileBtn = document.querySelector('.profile__create-btn');
   const createCardBtn = document.querySelector('.profile__add-btn');
   const closeCardBtn = document.querySelector('.popup__btn-card-close')
-  const addCardBtn = document.querySelector('.popup__btn-card-create')
   const closeProfileBtn = document.querySelector('.popup__btn-profile-close')
   const profileName = document.querySelector('.profile__title');
   const profileJob = document.querySelector('.profile__subtitle');
@@ -41,55 +43,30 @@ const initialCards = [
   const formProfile = document.querySelector('.popup__form-profile');
   const formCards = document.querySelector('.popup__form_type_card');
   const elements = document.querySelector('.elements');
-  const popupImage = document.querySelector('.popup__image');
-  const formImage = document.querySelector('.popup-image');
-  const formImageSubtitle = document.querySelector('.popup__subtitle')
   const template = document.querySelector('#card').content.querySelector('.element');
-  const imageClose = document.querySelector('.popup__btn-image-close')
- 
- 
 
-
-  function createCard(item) {
-    const card = template.cloneNode(true)
-    const img = card.querySelector('.element__image');
-    img.src = item.link
-    img.alt = item.name
-    img.addEventListener('click', function() {
-      popupImage.src = item.link
-      popupImage.alt = item.name
-      formImageSubtitle.textContent = item.name
-      openPopup(formImage)
-    })
-    card.querySelector('.element__title').textContent = item.name;
-    const like = card.querySelector('.element__like')
-    like.addEventListener('click', function() {like.classList.toggle('element__like_active')});
-    const clearCard = card.querySelector('.element__clear') 
-    clearCard.addEventListener('click', function() {card.remove()})
-    return card 
-}
-
-function handleCardSubmit (evt) {
-    evt.preventDefault();
+function handleCardSubmit (e, template) {
+    e.preventDefault();
     const item = {
         name : titleInput.value,
         link : urlInput.value,
     }
-    const card = createCard(item)
-    evt.target.reset()
-    elements.prepend(card)
+    const card = new Card(item, template);
+    const cardElement = card.generateCard();
+    e.target.reset()
+    elements.prepend(cardElement)
     closePopup(popupCard)
 }
 
-function renderCards(arr) {
-   const cards = arr.map(function (item) {
-    const card = createCard(item)
-    return card
-})
-  elements.append(...cards)
-}
-
-renderCards(initialCards)
+const renderCards = (initialCards, template) => {
+  initialCards.forEach((element) => {
+     const cards = new Card(element,template);
+     const cardElement = cards.generateCard();
+     elements.append(cardElement);
+   });
+ };
+ 
+renderCards(initialCards, template);
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -130,12 +107,11 @@ function handleProfileFormSubmit (evt) {
 }
 
 formProfile.addEventListener('submit', handleProfileFormSubmit); 
-formCards.addEventListener('submit', handleCardSubmit);
+formCards.addEventListener('submit',(e) => {handleCardSubmit(e, template)});
 createProfileBtn.addEventListener('click', openPopupProfile);
 createCardBtn.addEventListener('click', () => {openPopup(popupCard)});
 closeProfileBtn.addEventListener('click', () => {closePopup(popupProfile)});
 closeCardBtn.addEventListener('click',() => {closePopup(popupCard)});
-imageClose.addEventListener('click', () => {closePopup(formImage)})
 
 const formConfig = {
   formSelector: '.popup__form',
@@ -146,4 +122,13 @@ const formConfig = {
   errorClass: 'popup__error-message_active'
 }
 
-enableValidations(formConfig); 
+const valid = (formConfig) => {
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  formList.forEach((data) => {
+     const valid = new FormValidator(data, formConfig);
+     valid.enableValidations();
+   });
+ };
+ 
+ 
+valid(formConfig);
