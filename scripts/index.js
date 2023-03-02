@@ -130,5 +130,4 @@ const valid = (formConfig) => {
    });
  };
  
- 
 valid(formConfig);
