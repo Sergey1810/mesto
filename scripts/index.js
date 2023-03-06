@@ -42,11 +42,13 @@ const initialCards = [
   const formCards = document.querySelector('.popup__form_type_card');
   const elements = document.querySelector('.elements');
   const template = document.querySelector('#card').content.querySelector('.element');
+  const image = document.querySelector('.popup__image');
+  const subtitle = document.querySelector('.popup__subtitle');
 
 function handleCardClick(name, link, popup) {
-  document.querySelector('.popup__image').src = link; 
-  document.querySelector('.popup__subtitle').alt = name;
-  document.querySelector('.popup__subtitle').textContent = name;
+  image.src = link; 
+  subtitle.alt = name;
+  subtitle.textContent = name;
   openPopup(popup)
 }
 

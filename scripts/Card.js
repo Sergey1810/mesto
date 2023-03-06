@@ -13,23 +13,22 @@ export default class Card{
       }
 
     _toggleLike(){
-      this._likeButton.addEventListener('click', () => {this._likeButton.classList.toggle('element__like_active')});
+      this._likeButton.classList.toggle('element__like_active');
     }
 
     _deleteCard(){
-      this._clearCard.addEventListener('click', () => {this._element.remove()})
+      this._element.remove();
     }
 
-    _handleImageClick(){
-      this._image.addEventListener('click', () => {
-        this._handleCardClick(this._name, this._link, this._popupImg)
-        })
+    _handleImageClick(){ 
+      this._handleCardClick(this._name, this._link, this._popupImg)
     }
     
     _setEventListeners() {
-        this._toggleLike();
-        this._deleteCard();
-        this._handleImageClick();
+      this._likeButton.addEventListener('click', () => this._toggleLike());
+      this._clearCard.addEventListener('click', () =>  this._deleteCard())
+      this._image.addEventListener('click', () =>  this._handleImageClick())
+        
     }
     
     generateCard() {
