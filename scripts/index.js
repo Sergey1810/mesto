@@ -30,8 +30,6 @@ const initialCards = [
 
   const createProfileBtn = document.querySelector('.profile__create-btn');
   const createCardBtn = document.querySelector('.profile__add-btn');
-  const closeCardBtn = document.querySelector('.popup__btn-card-close')
-  const closeProfileBtn = document.querySelector('.popup__btn-profile-close')
   const profileName = document.querySelector('.profile__title');
   const profileJob = document.querySelector('.profile__subtitle');
   const popupProfile = document.querySelector('.popup-profile');
@@ -45,24 +43,33 @@ const initialCards = [
   const elements = document.querySelector('.elements');
   const template = document.querySelector('#card').content.querySelector('.element');
 
-function handleCardSubmit (e, template) {
+function handleCardClick(name, link, popup) {
+  document.querySelector('.popup__image').src = link; 
+  document.querySelector('.popup__subtitle').alt = name;
+  document.querySelector('.popup__subtitle').textContent = name;
+  openPopup(popup)
+}
+
+function createCard(item) {
+  const card = new Card(item, template, handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement
+}
+
+function handleCardSubmit (e) {
     e.preventDefault();
     const item = {
         name : titleInput.value,
         link : urlInput.value,
     }
-    const card = new Card(item, template);
-    const cardElement = card.generateCard();
     e.target.reset()
-    elements.prepend(cardElement)
+    elements.prepend(createCard(item))
     closePopup(popupCard)
 }
 
-const renderCards = (initialCards, template) => {
+const renderCards = (initialCards) => {
   initialCards.forEach((element) => {
-     const cards = new Card(element,template);
-     const cardElement = cards.generateCard();
-     elements.append(cardElement);
+     elements.append(createCard(element));
    });
  };
  
@@ -109,9 +116,17 @@ function handleProfileFormSubmit (evt) {
 formProfile.addEventListener('submit', handleProfileFormSubmit); 
 formCards.addEventListener('submit',(e) => {handleCardSubmit(e, template)});
 createProfileBtn.addEventListener('click', openPopupProfile);
-createCardBtn.addEventListener('click', () => {openPopup(popupCard)});
-closeProfileBtn.addEventListener('click', () => {closePopup(popupProfile)});
-closeCardBtn.addEventListener('click',() => {closePopup(popupCard)});
+createCardBtn.addEventListener('click', () => {
+  formValidators['popupCards'].resetValidation()
+  openPopup(popupCard)
+});
+
+const closeButtons = document.querySelectorAll('.popup__btn-close');
+
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
 
 const formConfig = {
   formSelector: '.popup__form',
@@ -122,12 +137,16 @@ const formConfig = {
   errorClass: 'popup__error-message_active'
 }
 
-const valid = (formConfig) => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
-  formList.forEach((data) => {
-     const valid = new FormValidator(data, formConfig);
-     valid.enableValidations();
-   });
- };
- 
-valid(formConfig);
+const formValidators = {}
+
+const enableValidation = (formConfig) => {
+  const formList = Array.from(document.querySelectorAll(formConfig.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, formConfig)
+    const formName = formElement.getAttribute('name')
+    formValidators[formName] = validator;
+   validator.enableValidations();
+  }); 
+};
+
+enableValidation(formConfig);
