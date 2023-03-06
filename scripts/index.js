@@ -103,7 +103,7 @@ function closePopup(popup){
 function openPopupProfile(){
     openPopup(popupProfile)
     nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
+    jobInput.value = profileJob.textContent; 
 }
 
 function handleProfileFormSubmit (evt) {
