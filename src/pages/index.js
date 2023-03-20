@@ -1,56 +1,17 @@
 import './index.css';
-import Card from '../scripts/Card.js';
-import FormValidator from "../scripts/FormValidator.js";
-import Section from '../scripts/Section.js';
-import PopupWithForm from '../scripts/PopupWithForm.js';
-import PopupWithImage from '../scripts/PopupWithImage.js';
-import UserInfo from '../scripts/UserInfo.js';
+import Card from '../components/Card.js';
+import FormValidator from "../components/FormValidator.js";
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import { initialCards,openProfileBtn, createCardBtn, profileName, profileJob, nameInput, jobInput, template } from '../utils/constans.js';
 
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ]; 
+const popupImage = new PopupWithImage('.popup-image')
+popupImage.setEventListeners()
 
-  const openProfileBtn = document.querySelector('.profile__create-btn');
-  const createCardBtn = document.querySelector('.profile__add-btn');
-  const profileName = document.querySelector('.profile__title');
-  const profileJob = document.querySelector('.profile__subtitle');
-  const popupProfile = document.querySelector('.popup-profile');
-  const popupCard = document.querySelector('.popup-card');
-  const nameInput = popupProfile.querySelector('.popup__input_type_name');
-  const jobInput = popupProfile.querySelector('.popup__input_type_job');
-  const elements = document.querySelector('.elements');
-  const template = document.querySelector('#card').content.querySelector('.element');
-  export const image = document.querySelector('.popup__image');
-  export const subtitle = document.querySelector('.popup__subtitle');
-  
-
-const handleCardClick = (name, link, popup) => {
-  const popupImage = new PopupWithImage(popup)
-  popupImage.openPopup(name, link)
-  popupImage.setEventListeners()
+const handleCardClick = (name, link) => {
+  popupImage.openPopup(name, link) 
 }
 
 function createCard(item) {
@@ -59,16 +20,15 @@ function createCard(item) {
   return cardElement
 }
 
-const CardList = new Section({
+const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, template, handleCardClick);
-    const cardElement = card.generateCard();
-    CardList.addItem(cardElement);
+    const card = createCard(item)
+    cardList.addItem(card);
   }
-}, elements);
+}, '.elements');
 
-CardList.rendererItems()
+cardList.rendererItems()
 
 const formConfig = {
   formSelector: '.popup__form',
@@ -95,14 +55,14 @@ enableValidation(formConfig);
 
 const info = new UserInfo(profileName, profileJob)
 
-const profilePopup = new PopupWithForm(popupProfile, (item) => {
+const profilePopup = new PopupWithForm('.popup-profile', (item) => {
     info.setUserInfo(item)
 })
 
 profilePopup.setEventListeners();
 
-const cardPopup = new PopupWithForm(popupCard, (item)=>{
-  elements.prepend(createCard({name:item.title, link:item.url}))
+const cardPopup = new PopupWithForm('.popup-card', (item)=>{
+  cardList.addCard(createCard({name:item.title, link:item.url}))
   formValidators['popupCards'].resetValidation()
 })
 
