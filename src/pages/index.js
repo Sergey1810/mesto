@@ -50,7 +50,7 @@ const initialCards = (res) => {
 
 const avatarPopup =  new PopupWithForm('.popup-avatar', (item) => {
   avatarPopup.renderLoading(true)
-  api.setChangeAvatar(item.url)
+  api.setChangeAvatar(item.urls)
   .then(res =>{
     info.setUserAvatar(res.avatar, res.name) 
   })
