@@ -24,20 +24,19 @@ const info = new UserInfo(profileName, profileJob, avatarImage)
 
 Promise.all([api.getUserInfo(),api.getInitialCards()]).then(([users, cards]) => {
   userId = users._id
-  userInfo(users)
-  initialCards(cards)
-})
+  setUserInfo(users)
+  renderInitialCards(cards)
+}).catch((err) => console.log(err))
 
-const userInfo = (data) =>{
-  const infoData = info.getUserInfo()
-  infoData.name.textContent = data.name
-  infoData.job.textContent = data.about
-  infoData.avatar.src = data.avatar
+const setUserInfo = (data) =>{
+  info.getUserInfo()
+  info.setUserInfo({name:data.name, job:data.about})
+  info.setUserAvatar({name:data.name, link:data.avatar})
 }
 
 let cardList = {}
 
-const initialCards = (res) => {
+const renderInitialCards = (res) => {
    cardList = new Section({
     items: res,
     renderer: (item) => {
@@ -52,12 +51,12 @@ const avatarPopup =  new PopupWithForm('.popup-avatar', (item) => {
   avatarPopup.renderLoading(true)
   api.setChangeAvatar(item.urls)
   .then(res =>{
-    info.setUserAvatar(res.avatar, res.name) 
+    info.setUserAvatar({name:res.name, link:res.avatar}) 
+    avatarPopup.closePopup()
   })
   .catch(err => console.log(err))
   .finally(() => {
     avatarPopup.renderLoading(false)
-    avatarPopup.closePopup()
   })
   formValidators['popupAvatar'].resetValidation()
 })
@@ -74,11 +73,11 @@ const profilePopup = new PopupWithForm('.popup-profile', (item) => {
   profilePopup.renderLoading(true)
   api.setUserInfo(item.name, item.job).then((res) =>{
     info.setUserInfo({name:res.name, job:res.about})
+    profilePopup.closePopup()
   })
   .catch(err => console.log(err))
   .finally(() => {
-    profilePopup.renderLoading(false)
-    profilePopup.closePopup()
+    profilePopup.renderLoading(false) 
   })
 })
 
@@ -134,11 +133,11 @@ const cardPopup = new PopupWithForm('.popup-card', (item)=>{
   api.setAddCard(item.title, item.url)
       .then(res => {
      cardList.addCard(createCard(res)) 
+     cardPopup.closePopup()
   })
   .catch(err => console.log(err))
   .finally(() =>{
-    cardPopup.renderLoading(false)
-    cardPopup.closePopup()
+    cardPopup.renderLoading(false) 
   })
   formValidators['popupCards'].resetValidation()
 })

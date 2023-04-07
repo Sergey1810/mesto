@@ -19,8 +19,8 @@ export default class UserInfo{
     this._job.textContent = item.job;
   }
 
-  setUserAvatar(src, alt){
-    this._avatar.src = src
-    this._avatar.alt = alt
+  setUserAvatar(data){
+    this._avatar.src = `${data.link}`
+    this._avatar.alt = data.name
   }
 }
