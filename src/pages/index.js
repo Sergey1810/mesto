@@ -59,6 +59,7 @@ const avatarPopup =  new PopupWithForm('.popup-avatar', (item) => {
     avatarPopup.renderLoading(false)
     avatarPopup.closePopup()
   })
+  formValidators['popupAvatar'].resetValidation()
 })
 
 avatarPopup.setEventListeners();
