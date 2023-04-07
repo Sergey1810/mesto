@@ -14,7 +14,12 @@
     <main>
       <section class="profile">
         <div class="profile__row">
+          <div class="profile__image">
             <img src= "727b5baa123f981bf5e0.png" alt="Жак-Ив Кусто" class="profile__avatar">
+            <div class="profile__image-hover">
+              <div class = "profile__icon"></div>
+            </div>  
+          </div>
           <div class="profile__info">
             <div class="profile__row-title">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -60,7 +65,7 @@
             <input type="url" class="popup__input popup__input_type_url" name="url" placeholder="Ссылка на картинку" required>
             <span class="popup__error-message url-input-error"></span>
           </div>
-          <button class="popup__btn-save popup__btn-card-create popup__btn-save_disable" type="submit">Сохранить</button>
+          <button class="popup__btn-save popup__btn-card-create popup__btn-save_disable" type="submit">Создать</button>
         </form>
       </div>
     </section>
@@ -73,14 +78,43 @@
         </div>      
       </div>
     </section>
+    <section class="popup popup-delete">
+      <div class="popup__container">
+        <button class="popup__btn-close " type="button"></button>
+        <form class="popup__form popup__form_type_delete" name="popupDelete" novalidate>
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button class="popup__btn-save" type="submit">Да</button>
+        </form>      
+      </div>
+    </section>
+    <section class="popup popup-avatar">
+      <div class="popup__container">
+        <button class="popup__btn-close " type="button"></button>
+        <form class="popup__form popup__form_type_avatar" name="popupAvatar" novalidate>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <div class="popup__field">
+            <input type="url" class="popup__input popup__input_type_urls" name="urls" placeholder="Ссылка на картинку" required>
+            <span class="popup__error-message urls-input-error"></span>
+          </div>
+          <button class="popup__btn-save popup__btn-save_disable" type="submit">Сохранить</button>
+        </form>      
+      </div>
+    </section>
+    
   </div>
+
+
   <template id="card">
     <div class="element">
       <img class="element__image">
       <img src="823b0cf1b0b7e9cb7cad.svg" alt="" class="element__clear">
       <div class="element__block">
         <h2 class="element__title"></h2>
-        <button type="button" class="element__like"></button>
+        <div>
+          <button type="button" class="element__like"></button>
+          <p class="element__like-info"></p>
+        </div>
+       
       </div>
     </div>
   </template>
